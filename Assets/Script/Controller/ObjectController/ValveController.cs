@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class ValveController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public ValveStatus status;
+    public WaterController waterController;
+
+    public void Awake()
     {
-        
+        waterController = GameObject.Find("WaterController").GetComponent<WaterController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Change the status of the pipe to the broken one.
+     /// Increase the water increase speed.
+    /// </summary>
+    public void Broke()
     {
-        
+        status = ValveStatus.BROKEN;
+        waterController.openPipes++;
+    }
+
+    /// <summary>
+    /// Change the status of the pipe to the working/open/Fixed one.
+    /// Reduce the water increase speed.
+    /// </summary>
+    public void FixedJoint()
+    {
+        status = ValveStatus.OPEN;
+        waterController.openPipes--;
     }
 }
