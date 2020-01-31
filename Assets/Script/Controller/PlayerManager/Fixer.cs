@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fixer : MonoBehaviour
+public class Fixer : Player
 {
     // Start is called before the first frame update
     void Start()
