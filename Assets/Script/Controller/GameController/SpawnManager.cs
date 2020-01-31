@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<PlayerManager> characters = new List<PlayerManager>();
+    public GameObject fixerPrefab;
+    public GameObject destroyerPrefab;
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnCharacter(PlayerType type)
     {
-        
+        if (type == PlayerType.DESTROYER)
+        {
+
+        } else 
+        {
+
+        }
     }
 }
