@@ -6,14 +6,16 @@ public class ValveController : MonoBehaviour, SceneObjectController
 {
     public ValveStatus status;
     public WaterController waterController;
-    public Color brokenColor;
     SpriteRenderer m_SpriteRenderer;
     public GameObject audioManager;
+    public Animator animator;
 
 
     public void ActivateObject(GameObject player)
     {
-        if(status == ValveStatus.BROKEN && (player.GetComponent<Player>() is Fixer))
+        player.GetComponent<Player>().animator.SetTrigger("Action");
+
+        if (status == ValveStatus.BROKEN && (player.GetComponent<Player>() is Fixer))
         {
             FixedJoint();
         } else if(status == ValveStatus.OPEN && (player.GetComponent<Player>() is Destroyer))
@@ -38,8 +40,8 @@ public class ValveController : MonoBehaviour, SceneObjectController
     {
         status = ValveStatus.BROKEN;
         waterController.openPipes++;
-        m_SpriteRenderer.color = brokenColor;
         audioManager.GetComponent<AudioController>().Broke();
+        animator.SetBool("IsBroken", true);
     }
 
     /// <summary>
@@ -50,8 +52,9 @@ public class ValveController : MonoBehaviour, SceneObjectController
     {
         status = ValveStatus.OPEN;
         waterController.openPipes--;
-        m_SpriteRenderer.color = Color.white;
         audioManager.GetComponent<AudioController>().Repair();
+        animator.SetBool("IsBroken", false);
+
     }
 
 

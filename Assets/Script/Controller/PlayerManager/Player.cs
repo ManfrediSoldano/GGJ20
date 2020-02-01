@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public float jumpForce;
     Rigidbody2D rb;
     public Collider2D currentCollider;
-    private Animator animator;
+    public Animator animator;
     private bool isLookRight = true;
     private AudioController audioController;
     private GameController gameController;
@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
         {
             audioController.Jump();
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            animator.SetBool("Jump", true);
+            animator.SetTrigger("Jump");
         }
     }
 
@@ -81,12 +81,11 @@ public class Player : MonoBehaviour
 
         if (this.playerNumber == playerNumber)
         {
-            animator.SetTrigger("Action");
+            //animator.SetTrigger("Action");
             if (currentCollider != null)
             {
                 if (currentCollider.gameObject != null && currentCollider.gameObject.tag != null)
                 {
-
                     if (currentCollider.gameObject.tag == "Object")
                     {
                         currentCollider.gameObject.GetComponent<SceneObjectController>().ActivateObject(this.gameObject);
