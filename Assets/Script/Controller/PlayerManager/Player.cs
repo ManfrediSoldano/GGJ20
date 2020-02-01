@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private GameController gameController;
     public PunchColliderController punchCollider;
     private bool locker = false;
+    public GameObject xButton;
     // Start is called before the first frame update
     void Awake()
     {
@@ -99,11 +100,24 @@ public class Player : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         currentCollider = collision;
+        if (currentCollider != null)
+        {
+            if (currentCollider.gameObject != null && currentCollider.gameObject.tag != null)
+            {
+                if (currentCollider.gameObject.tag == "Object")
+                {
+                    xButton.SetActive(true);
+                }
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         currentCollider = null;
+
+        xButton.SetActive(false);
+
     }
 
 
@@ -116,8 +130,8 @@ public class Player : MonoBehaviour
             {
                 if (playerInList is Destroyer)
                 {
-                    Debug.Log("checking "+ playerInList.name);
-                    if (punchCollider.currentPlayer != null 
+                    Debug.Log("checking " + playerInList.name);
+                    if (punchCollider.currentPlayer != null
                         && playerInList == punchCollider.currentPlayer)
                     {
                         locker = true;
@@ -131,5 +145,5 @@ public class Player : MonoBehaviour
         }
     }
 
-   
+
 }
