@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(Rigidbody2D))]
+
 public class Player : MonoBehaviour
 {
     int playerNumber;
+    public float velocity;
+    public float jumpForce;
+    Rigidbody2D rb;
+    
     // Start is called before the first frame update
     void Start()
     {
         InputManager.OnMove += Walk;
         InputManager.OnJump += Jump;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -24,9 +32,9 @@ public class Player : MonoBehaviour
         InputManager.OnJump -= Jump;
     }
 
-    void Walk(int playerNumber, float Direction) {
+    void Walk(int playerNumber, float direction) {
         if (this.playerNumber == playerNumber) {
-
+            rb.velocity = new Vector2 (direction * velocity, rb.velocity.y);
         }
     }
 
@@ -37,4 +45,13 @@ public class Player : MonoBehaviour
 
         }
     }
+
+    void Use(int playerNumber)
+    {
+        if (this.playerNumber == playerNumber)
+        {
+            rb.AddForce(new Vector2 (0, jumpForce), ForceMode2D.Impulse);
+        }
+    }
+
 }
