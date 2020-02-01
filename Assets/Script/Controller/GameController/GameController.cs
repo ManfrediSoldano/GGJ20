@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -11,10 +12,24 @@ public class GameController : MonoBehaviour
     public SpawnManager spawnManager;
     public GameObject playerContainer;
     private int playerCounter = 1;
+    //Timer variables
+    public float timeLeft= 60.0f;
+    public Text text;
+
 
     public void Start()
     {
         SpawnInitialPlayers();
+    }
+
+    void FixedUpdate()
+    {
+        timeLeft -= Time.fixedDeltaTime;
+        text.text = "Time: " + Mathf.Round(timeLeft);
+        if (timeLeft < 0)
+        {
+            Application.LoadLevel("gameOver");
+        }
     }
 
     /// <summary>
