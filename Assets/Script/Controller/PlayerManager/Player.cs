@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float jumpForce;
     Rigidbody2D rb;
     public Collider2D currentCollider;
+    private Animator animator;
     
     // Start is called before the first frame update
     void Awake()
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
         InputManager.OnUse += Use;
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
+        animator = GetComponent<Animator>();
     }
 
    
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
     void Walk(int playerNumber, float direction) {
         if (this.playerNumber == playerNumber) {
             rb.velocity = new Vector2 (direction * velocity, rb.velocity.y);
+            animator.SetFloat("Velocity", Mathf.Abs(rb.velocity.x));
         }
     }
 
@@ -44,13 +47,14 @@ public class Player : MonoBehaviour
         if (this.playerNumber == playerNumber && (rb.velocity.y < 0.01 && rb.velocity.y > -0.01))
         {   
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            animator.SetBool("Jump", true);
         }
     }
 
     void Use(int playerNumber)
     {
         Debug.Log("Received a USE request: " + playerNumber + " my player number: " + this.playerNumber);
-
+        animator.SetTrigger("Action");
         if (this.playerNumber == playerNumber)
         {
             if(currentCollider != null)
@@ -65,9 +69,11 @@ public class Player : MonoBehaviour
                 }
             }
         }
+     
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         currentCollider = collision;
     }
