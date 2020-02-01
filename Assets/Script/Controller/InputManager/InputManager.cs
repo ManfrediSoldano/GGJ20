@@ -11,6 +11,8 @@ public class InputManager : MonoBehaviour
     public delegate void Use(int playerNumber);
     public delegate void Pause(int playerNumber);
     public delegate void VerticalMove(float mov);
+    public delegate void Punch(int playerNumber);
+
 
     //Event related to the delegate.
     public static event Move OnMove;
@@ -18,11 +20,15 @@ public class InputManager : MonoBehaviour
     public static event Use OnUse;
     public static event Pause OnPause;
     public static event VerticalMove OnVerticalMove;
+    public static event Punch OnPunch;
 
     [Range(0.0f, 1f)]
     public float limitHorizontalMove;
 
     public float previousHorizontal2;
+
+    private float previousVertical2;
+    private float previousVertical1;
 
     private void NotifyNewMove(int playerNumber, float mov)
     {
@@ -65,6 +71,15 @@ public class InputManager : MonoBehaviour
             OnPause(playerNumber);
         }
     }
+
+    private void NotifyPunch(int playerNumber)
+    {
+        if (OnPunch != null)
+        {
+            OnPunch(playerNumber);
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -110,16 +125,32 @@ public class InputManager : MonoBehaviour
         }
 
 
+        if (Input.GetButtonDown("Joy1B"))
+        {
+            NotifyPunch(1);
+        }
+
         if (Input.GetAxis("Joy1DPadVertical") == 1)
         {
-            NotifyVerticalMove(1);
-            Debug.Log("Pressed a vertical move (positive)", this);
+            if (previousVertical1 != 1f)
+            {
+                NotifyVerticalMove(1);
+                Debug.Log("Pressed a vertical move (positive)", this);
+                previousVertical1 = 1f;
+            }
         }
         else if (Input.GetAxis("Joy1DPadVertical") == -1)
         {
-            NotifyVerticalMove(-1);
-            Debug.Log("Pressed a vertical move (negative)", this);
+            if (previousVertical1 != -1f)
+            {
+                NotifyVerticalMove(-1);
+                Debug.Log("Pressed a vertical move (negative)", this);
+                previousVertical1 = -1f;
+            }
 
+        } else
+        {
+            previousVertical1 = 0f;
         }
 
 
@@ -158,16 +189,34 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetAxis("Joy2DPadVertical") == 1)
         {
-            NotifyVerticalMove(1);
-            Debug.Log("Pressed a vertical move (positive)", this);
-
+            if (previousVertical2 != 1f)
+            {
+                NotifyVerticalMove(1);
+                Debug.Log("Pressed a vertical move (positive)", this);
+                previousVertical2 = 1f;
+            }
         }
         else if (Input.GetAxis("Joy2DPadVertical") == -1)
         {
-            NotifyVerticalMove(-1);
-            Debug.Log("Pressed a vertical move (negative)", this);
+            if (previousVertical2 != -1f)
+            {
+                NotifyVerticalMove(-1);
+                Debug.Log("Pressed a vertical move (negative)", this);
+                previousVertical2 = -1f;
+            }
 
         }
+        else
+        {
+            previousVertical2 = 0f;
+        }
+
+
+        if (Input.GetButtonDown("Joy2B"))
+        {
+            NotifyPunch(2);
+        }
+
 
     }
 
