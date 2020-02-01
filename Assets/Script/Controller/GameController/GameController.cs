@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     public GameObject playerContainer;
     private int playerCounter = 1;
     //Timer variables
-    public float timeLeft= 60.0f;
+    public float timeLeft = 60.0f;
     public Text text;
     //Pause Handling
     private bool onPause = false;
@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
             if (Minutes < 10) {
                 timer = "0" + Minutes.ToString();
             }
-            else{
+            else {
                 timer = Minutes.ToString();
             }
 
@@ -57,18 +57,20 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                timer += ":"+Seconds.ToString();
+                timer += ":" + Seconds.ToString();
             }
 
-            text.text =  timer;
+            text.text = timer;
 
-        }else if (timeLeft < 0)
+        } else if (timeLeft < 0)
         {
             timeLeft = 0;
             text.text = "Game Over";
+            WinConditions("Plumber");
         }
-        else{
+        else {
             text.text = "Game Over";
+            WinConditions("Plumber");
             //Application.LoadLevel("gameOver");
         }
     }
@@ -139,7 +141,10 @@ public class GameController : MonoBehaviour
             playersList.Add(newPlayer.GetComponent<Player>());
         } else
         {
-            Debug.Log("Player "+ name+ " has been definately killed.");
+            Debug.Log("Player " + name + " has been definately killed.");
+            if (player is Destroyer) {
+                WinConditions("Destroyer");
+            }
         }
     }
 
@@ -155,9 +160,24 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void WinConditions() {
-        //if (time) {
+    private bool alreadyFinished =false;
+    void WinConditions(string winner) {
+        if (alreadyFinished == false)
+        {
+            if ((winner == "Destroyer" && timeLeft == 0) || (winner == "Plumber" && playersList.Count == 0))
+            {
+                Debug.Log("Tie");
+            }
+            else if (winner == "Plumber")
+            {
+                Debug.Log("Plumber Wins");
+            }
+            else if (winner == "Destroyer")
+            {
+                Debug.Log("Destroyer Wins");
+            }
+            alreadyFinished = true;
+        }
 
-        //}
     }
 }
