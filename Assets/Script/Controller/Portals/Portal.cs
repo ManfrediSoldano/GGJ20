@@ -25,7 +25,14 @@ public class Portal : MonoBehaviour, SceneObjectController
     /// <param name="player">The player that needs to be moved.</param>
     public void ActivatePortal(GameObject player)
     {
+        player.GetComponent<Player>().animator.SetTrigger("DoorAction");
+        audioManager.GetComponent<AudioController>().Door();
+        StartCoroutine(MoveToPortal(player));
+    }
+
+    public IEnumerator MoveToPortal(GameObject player)
+    {
+        yield return new WaitForSeconds(0.2f);
         player.gameObject.transform.position = connectedPortal.transform.position;
-        audioManager.GetComponent<AudioController>().Repair();
     }
 }

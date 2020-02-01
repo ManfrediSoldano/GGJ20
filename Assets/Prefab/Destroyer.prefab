@@ -147,8 +147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 4
-  jumpForce: 8
+  jumpForce: 6
   currentCollider: {fileID: 0}
+  animator: {fileID: 0}
   punchCollider: {fileID: 0}
   xButton: {fileID: 8199128613253802228}
 --- !u!95 &581590006242439801
@@ -239,7 +240,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 0beb2d77f3964a1429ed19d8dd6f9309, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
