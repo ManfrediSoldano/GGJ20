@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public Collider2D currentCollider;
     private Animator animator;
     private bool isLookRight = true;
-    private AudioController controller;
+    private AudioController audioController;
 
     // Start is called before the first frame update
     void Awake()
@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
         animator = GetComponent<Animator>();
+        audioController = GameObject.Find("AudioManager").GetComponent<AudioController>();
     }
 
    
@@ -57,7 +58,8 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Received a JUMP request: " + playerNumber + " my player number: " + this.playerNumber);
         if (this.playerNumber == playerNumber && (rb.velocity.y < 0.01 && rb.velocity.y > -0.01))
-        {   
+        {
+            audioController.Jump();
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             animator.SetBool("Jump", true);
         }
