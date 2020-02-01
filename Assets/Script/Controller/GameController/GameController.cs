@@ -15,7 +15,18 @@ public class GameController : MonoBehaviour
     //Timer variables
     public float timeLeft= 60.0f;
     public Text text;
+    //Pause Handling
+    private bool onPause = false;
 
+    public void Awake()
+    {
+        InputManager.OnPause += PauseGame;
+    }
+
+    public void OnDestroy()
+    {
+        InputManager.OnPause -= PauseGame;
+    }
 
     public void Start()
     {
@@ -54,8 +65,10 @@ public class GameController : MonoBehaviour
         }else if (timeLeft < 0)
         {
             timeLeft = 0;
+            text.text = "Game Over";
         }
         else{
+            text.text = "Game Over";
             //Application.LoadLevel("gameOver");
         }
     }
@@ -128,5 +141,23 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Player "+ name+ " has been definately killed.");
         }
+    }
+
+    void PauseGame(int PlayerNumber) {
+        if (onPause == false)
+        {
+            onPause = true;
+            Time.timeScale = 0;
+            text.text = "Pause";
+        } else {
+            onPause = false;
+            Time.timeScale = 1;
+        }
+    }
+
+    void WinConditions() {
+        //if (time) {
+
+        //}
     }
 }
