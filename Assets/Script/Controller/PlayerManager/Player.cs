@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public Collider2D currentCollider;
     private Animator animator;
     private bool isLookRight = true;
+    private AudioController controller;
 
     // Start is called before the first frame update
     void Awake()
