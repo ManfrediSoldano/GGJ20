@@ -42,9 +42,18 @@ public class InputManager : MonoBehaviour
         }
 
         if (Input.GetAxis("jump") > 0) {
-            NotifyNewMove(1, Input.GetAxis("Horizontal"));
+            NotifyNewMove(1, Input.GetAxis("jump"));
         }
 
+        if (Input.GetAxis("Joy2Horizontal") > 0)
+        {
+            NotifyNewMove(2, Input.GetAxis("Joy2Horizontal"));
+        }
+
+        if (Input.GetAxis("jump") > 0)
+        {
+            NotifyNewMove(2, Input.GetAxis("Joy2A"));
+        }
 
     }
 
