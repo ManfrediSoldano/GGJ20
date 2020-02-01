@@ -24,8 +24,10 @@ public class InputManager : MonoBehaviour
 
     private void NotifyNewJump(int playerNumber)
     {
+        Debug.Log("Trying to send a push notification for a new Jump.");
         if (OnJump != null)
         {
+            Debug.Log("Sending push notification for a new Jump.");
             OnJump(playerNumber);
         }
     }
@@ -48,32 +50,36 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         //player 1
-        if (Input.GetAxis("Horizontal") != 0) {
+        if (Input.GetAxis("Horizontal") < -0.2f || Input.GetAxis("Horizontal") > 0.2f) {
             NotifyNewMove(1, Input.GetAxis("Horizontal"));
         }
 
-        if (Input.GetAxis("jump") > 0) {
-            NotifyNewMove(1, Input.GetAxis("jump"));
+        if (Input.GetButtonDown("JumpJoystick1")) {
+            Debug.Log("jump pressed");
+            NotifyNewJump(1);
         }
 
-        if (Input.GetAxis("Fire3") > 0)
+        if (Input.GetButtonDown("Fire3"))
         {
-            NotifyNewMove(1, Input.GetAxis("Fire3"));
+            NotifyUse(1);
         }
+
+
         //player 2
-        if (Input.GetAxis("Joy2Horizontal") > 0)
+        if (Input.GetAxis("Joy2Horizontal") > 0.2f || Input.GetAxis("Joy2Horizontal") < -0.2f)
         {
             NotifyNewMove(2, Input.GetAxis("Joy2Horizontal"));
         }
 
-        if (Input.GetAxis("Joy2A") > 0)
+        if (Input.GetButtonDown("Joy2A"))
         {
-            NotifyNewMove(2, Input.GetAxis("Joy2A"));
+            Debug.Log("jump pressed 2");
+            NotifyNewJump(2);
         }
 
-        if (Input.GetAxis("Joy2X") > 0)
+        if (Input.GetButtonDown("Joy2X"))
         {
-            NotifyNewMove(2, Input.GetAxis("Joy2X"));
+            NotifyUse(2);
         }
 
     }

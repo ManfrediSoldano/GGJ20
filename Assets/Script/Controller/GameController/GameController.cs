@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     public int numberOfDestroyers;
     public SpawnManager spawnManager;
     public GameObject playerContainer;
-
+    private int playerCounter = 1;
 
     public void Start()
     {
@@ -24,12 +24,15 @@ public class GameController : MonoBehaviour
     {
         while (numberOfFixers > 0)
         {
-            GameObject player = spawnManager.SpawnNewPlayer(PlayerType.FIXER);
-            if (player != null)
-            {              
-                player.transform.parent = playerContainer.transform;
-                playersList.Add(player.GetComponent<Player>());
+            GameObject playerGO = spawnManager.SpawnNewPlayer(PlayerType.FIXER);
+            if (playerGO != null)
+            {
+                playerGO.transform.parent = playerContainer.transform;
+                Player player = playerGO.GetComponent<Player>();
+                playersList.Add(player);
                 numberOfFixers--;
+                player.playerNumber = playerCounter;
+                playerCounter++;
             }
             else
             {
@@ -39,12 +42,16 @@ public class GameController : MonoBehaviour
 
         while (numberOfDestroyers > 0)
         {
-            GameObject player = spawnManager.SpawnNewPlayer(PlayerType.DESTROYER);
-            if (player != null)
+            GameObject playerGO = spawnManager.SpawnNewPlayer(PlayerType.DESTROYER);
+
+            if (playerGO != null)
             {
-                player.transform.parent = playerContainer.transform;
-                playersList.Add(player.GetComponent<Player>());
+                playerGO.transform.parent = playerContainer.transform;
+                Player player = playerGO.GetComponent<Player>();
+                playersList.Add(player);
                 numberOfDestroyers--;
+                player.playerNumber = playerCounter;
+                playerCounter++;
             }
             else
             {
