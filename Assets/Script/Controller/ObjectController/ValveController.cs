@@ -6,13 +6,16 @@ public class ValveController : MonoBehaviour, SceneObjectController
 {
     public ValveStatus status;
     public WaterController waterController;
+    public Color brokenColor;
+    SpriteRenderer m_SpriteRenderer;
+
 
     public void ActivateObject(GameObject player)
     {
-        if(status == ValveStatus.BROKEN)
+        if(status == ValveStatus.BROKEN && (player.GetComponent<Player>() is Fixer))
         {
             FixedJoint();
-        } else
+        } else if(status == ValveStatus.OPEN && (player.GetComponent<Player>() is Destroyer))
         {
             Broke();
         }
@@ -21,16 +24,19 @@ public class ValveController : MonoBehaviour, SceneObjectController
     public void Awake()
     {
         waterController = GameObject.Find("WaterController").GetComponent<WaterController>();
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     /// <summary>
     /// Change the status of the pipe to the broken one.
-     /// Increase the water increase speed.
+    /// Increase the water increase speed.
     /// </summary>
     public void Broke()
     {
         status = ValveStatus.BROKEN;
         waterController.openPipes++;
+        m_SpriteRenderer.color = brokenColor;
     }
 
     /// <summary>
@@ -41,6 +47,7 @@ public class ValveController : MonoBehaviour, SceneObjectController
     {
         status = ValveStatus.OPEN;
         waterController.openPipes--;
+        m_SpriteRenderer.color = Color.white;
     }
 
 
