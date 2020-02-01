@@ -11,6 +11,8 @@ public class SpawnManager : MonoBehaviour
     public GameObject fixerPrefab;
     public GameObject destroyerPrefab;
 
+    private int seedHelper = 0;
+
     private void Awake()
     {
         //Popolate the SpawnPoint Lists
@@ -34,13 +36,12 @@ public class SpawnManager : MonoBehaviour
     /// <param name="type"></param>
     public GameObject SpawnNewPlayer(PlayerType type)
     {
-        Debug.Log("Spawning a new player. Type: "+type, this);
         SpawnPoint point = GetSpawnPositionCharacter(type);
+
         if (type == PlayerType.FIXER)
             return (Instantiate(fixerPrefab, point.transform.position, Quaternion.identity));
         else
             return (Instantiate(destroyerPrefab, point.transform.position, Quaternion.identity));
-
     }
 
     /// <summary>
@@ -49,11 +50,14 @@ public class SpawnManager : MonoBehaviour
     /// <param name="type"> Type of the player. </param>
     public SpawnPoint GetSpawnPositionCharacter(PlayerType type)
     {
-        System.Random random = new System.Random();
-        int shouldUseShared = random.Next(2);
+        Random.InitState(System.DateTime.Now.Millisecond + seedHelper);
+        seedHelper++;
+        int shouldUseShared = Random.Range(0, 2);
+
         bool useShared = false;
         if (sharedSpawnPointList.Count > 0 && shouldUseShared == 1)
             useShared = true;
+
         if (type == PlayerType.DESTROYER)
         {
             if (sharedSpawnPointList.Count > 0 && destroyerSpawnPointList.Count == 0)
@@ -61,12 +65,12 @@ public class SpawnManager : MonoBehaviour
 
             if (useShared)
             {
-                int index = random.Next(sharedSpawnPointList.Count);
+                int index = Random.Range(0, sharedSpawnPointList.Count);
                 return (sharedSpawnPointList[index]);
             }
             else
             {
-                int index = random.Next(destroyerSpawnPointList.Count);
+                int index = Random.Range(0, destroyerSpawnPointList.Count);
                 return (destroyerSpawnPointList[index]);
             }
         }
@@ -77,12 +81,12 @@ public class SpawnManager : MonoBehaviour
 
             if (useShared)
             {
-                int index = random.Next(sharedSpawnPointList.Count);
+                int index = Random.Range(0, sharedSpawnPointList.Count);
                 return (sharedSpawnPointList[index]);
             }
             else
             {
-                int index = random.Next(fixerSpawnPointList.Count);
+                int index = Random.Range(0, fixerSpawnPointList.Count);
                 return (fixerSpawnPointList[index]);
             }
         }
