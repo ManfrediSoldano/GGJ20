@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     {
         if (this.playerNumber == playerNumber)
         {
-
+            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
     }
 
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     {
         if (this.playerNumber == playerNumber)
         {
-            rb.AddForce(new Vector2 (0, jumpForce), ForceMode2D.Impulse);
+            
         }
     }
 
