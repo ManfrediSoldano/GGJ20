@@ -254,6 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedPortal: {fileID: 1523811860}
+  audioManager: {fileID: 0}
 --- !u!61 &60377820
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -982,6 +983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedPortal: {fileID: 497676388}
+  audioManager: {fileID: 0}
 --- !u!61 &436767473
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1391,6 +1393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedPortal: {fileID: 436767471}
+  audioManager: {fileID: 0}
 --- !u!61 &497676391
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1628,7 +1631,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e39fe20b577bd7f4184d46e191ae615a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.081
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3235,6 +3238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedPortal: {fileID: 60377817}
+  audioManager: {fileID: 0}
 --- !u!61 &1523811862
 BoxCollider2D:
   m_ObjectHideFlags: 0
