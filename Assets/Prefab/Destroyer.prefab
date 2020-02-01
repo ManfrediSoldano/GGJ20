@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 4
-  jumpForce: 4
+  jumpForce: 5
   currentCollider: {fileID: 0}
 --- !u!95 &581590006242439801
 Animator:
