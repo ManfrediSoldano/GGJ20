@@ -34,14 +34,17 @@ public class SceneController : MonoBehaviour
     private void VerticalMove(float mov)
     {
         Debug.Log("Requested a vertical move", this);
+
          if (mov > 0)
         {
             if (position == 0)
             {
+                Debug.Log("Quit Game", this);
                 quitGame.Select();
                 position = 1;
             } else
             {
+                Debug.Log("Start Game", this);
                 startGame.Select();
                 position = 0;
             }
@@ -49,13 +52,14 @@ public class SceneController : MonoBehaviour
         {
             if (position == 0)
             {
-                startGame.Select();
-                position = 0;
+
+                quitGame.Select();
+                position = 1;
             }
             else
             {
-                quitGame.Select();
-                position = 1;
+                startGame.Select();
+                position = 0;
                 
             }
         }

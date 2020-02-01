@@ -133,7 +133,6 @@ public class GameController : MonoBehaviour
         {
             newPlayer = spawnManager.SpawnNewPlayer(PlayerType.DESTROYER);
         }
-        Destroy(player.gameObject);
         if (newPlayer != null)
         {
             newPlayer.GetComponent<Player>().playerNumber = playerNumber;
@@ -143,6 +142,46 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Player " + name + " has been definately killed.");
             if (player is Destroyer) {
+                WinConditions("Destroyer");
+            }
+        }
+        Destroy(player.gameObject);
+
+    }
+
+    internal void Kill(Player player)
+    {
+        playersList.Remove(player);
+        String name = player.name;
+        int playerNumber = player.GetComponent<Player>().playerNumber;
+        StartCoroutine(SpawnKilledEnemy(playerNumber, player is Destroyer, name));
+        Destroy(player.gameObject);
+
+    }
+
+    private IEnumerator SpawnKilledEnemy(int playerNumber, bool isDestroyer, string name)
+    {
+        GameObject newPlayer;
+        yield return new WaitForSeconds(4);
+        if (!isDestroyer)
+        {
+            newPlayer = spawnManager.SpawnNewPlayer(PlayerType.FIXER);
+        }
+        else
+        {
+            newPlayer = spawnManager.SpawnNewPlayer(PlayerType.DESTROYER);
+        }
+        if (newPlayer != null)
+        {
+            newPlayer.GetComponent<Player>().playerNumber = playerNumber;
+            newPlayer.transform.parent = playerContainer.transform;
+            playersList.Add(newPlayer.GetComponent<Player>());
+        }
+        else
+        {
+            Debug.Log("Player " + name + " has been definately killed.");
+            if (isDestroyer)
+            {
                 WinConditions("Destroyer");
             }
         }
