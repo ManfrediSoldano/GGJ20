@@ -15,10 +15,23 @@ public class SceneController : MonoBehaviour
     public bool blockLoading = false;
     void Start()
     {
+
         startGame.onClick.AddListener(LoadScene);
         quitGame.onClick.AddListener(Quit);
+        InputManager.OnVerticalMove += VerticalMove;
+
+        startGame.Select();
     }
-    
+
+    private void OnDestroy()
+    {
+        InputManager.OnVerticalMove -= VerticalMove;
+    }
+
+    private void VerticalMove(float mov)
+    {
+     
+    }
 
     private void LoadScene()
     {

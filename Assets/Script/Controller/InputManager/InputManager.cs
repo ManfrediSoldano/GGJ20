@@ -10,12 +10,14 @@ public class InputManager : MonoBehaviour
     public delegate void Jump(int playerNumber);
     public delegate void Use(int playerNumber);
     public delegate void Pause(int playerNumber);
+    public delegate void VerticalMove(float mov);
+
     //Event related to the delegate.
     public static event Move OnMove;
     public static event Jump OnJump;
     public static event Use OnUse;
     public static event Pause OnPause;
-    
+    public static event VerticalMove OnVerticalMove;
 
     [Range(0.0f, 1f)]
     public float limitHorizontalMove;
@@ -45,6 +47,14 @@ public class InputManager : MonoBehaviour
         if (OnUse != null)
         {
             OnUse(playerNumber);
+        }
+    }
+
+    private void NotifyVerticalMove(float mov)
+    {
+        if (OnVerticalMove != null)
+        {
+            OnVerticalMove(mov);
         }
     }
 
@@ -100,6 +110,15 @@ public class InputManager : MonoBehaviour
         }
 
 
+        if (Input.GetAxis("Joy1DPadVertical") == 1)
+        {
+            NotifyVerticalMove(1);
+        }
+        else if (Input.GetAxis("Joy1DPadVertical") == -1)
+        {
+            NotifyVerticalMove(-1);
+        }
+
 
         //player 2
         if (Input.GetAxis("Joy2Dpad") == 1)
@@ -131,6 +150,16 @@ public class InputManager : MonoBehaviour
         if (Input.GetButtonDown("Joy2Start"))
         {
             NotifyPause(2);
+        }
+
+
+        if (Input.GetAxis("Joy2DPadVertical") == 1)
+        {
+            NotifyVerticalMove(1);
+        }
+        else if (Input.GetAxis("Joy2DPadVertical") == -1)
+        {
+            NotifyVerticalMove(-1);
         }
 
     }
