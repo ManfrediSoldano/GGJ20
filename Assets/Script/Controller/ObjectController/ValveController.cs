@@ -41,6 +41,8 @@ public class ValveController : MonoBehaviour, SceneObjectController
         status = ValveStatus.BROKEN;
         waterController.openPipes++;
         audioManager.GetComponent<AudioController>().Broke();
+                transform.Rotate(0, 180, 0, Space.Self);
+
         animator.SetBool("IsBroken", true);
     }
 
@@ -53,6 +55,8 @@ public class ValveController : MonoBehaviour, SceneObjectController
         status = ValveStatus.OPEN;
         waterController.openPipes--;
         audioManager.GetComponent<AudioController>().Repair();
+        transform.Rotate(0, 180, 0, Space.Self);
+
         animator.SetBool("IsBroken", false);
 
     }
