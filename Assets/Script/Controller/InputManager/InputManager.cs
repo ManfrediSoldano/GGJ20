@@ -14,6 +14,11 @@ public class InputManager : MonoBehaviour
     public static event Jump OnJump;
     public static event Use OnUse;
 
+    [Range(0.0f, 1f)]
+    public float limitHorizontalMove;
+
+    public float previousHorizontal2;
+
     private void NotifyNewMove(int playerNumber, float mov)
     {
         if (OnMove != null)
@@ -50,11 +55,25 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         //player 1
-        if (Input.GetAxis("Horizontal") < -0.2f || Input.GetAxis("Horizontal") > 0.2f) {
+        if (Input.GetAxis("Joy1Dpad") == 1)
+        {
+            NotifyNewMove(1, 1);
+        }
+        else if (Input.GetAxis("Joy1Dpad") == -1)
+        {
+            NotifyNewMove(1, -1);
+        }
+        else if (Input.GetAxis("Horizontal") < -0.3f || Input.GetAxis("Horizontal") > 0.3f)
+        {
             NotifyNewMove(1, Input.GetAxis("Horizontal"));
         }
+        else
+        {
+            NotifyNewMove(1, 0);
+        }
 
-        if (Input.GetButtonDown("JumpJoystick1")) {
+        if (Input.GetButtonDown("JumpJoystick1"))
+        {
             Debug.Log("jump pressed");
             NotifyNewJump(1);
         }
@@ -65,10 +84,21 @@ public class InputManager : MonoBehaviour
         }
 
 
+
         //player 2
-        if (Input.GetAxis("Joy2Horizontal") > 0.2f || Input.GetAxis("Joy2Horizontal") < -0.2f)
+        if (Input.GetAxis("Joy2Dpad") == 1)
         {
+            NotifyNewMove(2, 1);
+        }
+        else if (Input.GetAxis("Joy2Dpad") == -1)
+        {
+            NotifyNewMove(2, -1);
+        }
+        else if (Input.GetAxis("Joy2Horizontal") > 0.3f || Input.GetAxis("Joy2Horizontal") < -0.3f){
             NotifyNewMove(2, Input.GetAxis("Joy2Horizontal"));
+        } else 
+        {
+            NotifyNewMove(2, 0);
         }
 
         if (Input.GetButtonDown("Joy2A"))
@@ -85,6 +115,6 @@ public class InputManager : MonoBehaviour
     }
 
 
-    
+
 
 }

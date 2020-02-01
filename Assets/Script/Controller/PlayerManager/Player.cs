@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     void Jump(int playerNumber)
     {
         Debug.Log("Received a JUMP request: " + playerNumber + " my player number: " + this.playerNumber);
-        if (this.playerNumber == playerNumber && rb.velocity.y == 0)
+        if (this.playerNumber == playerNumber && (rb.velocity.y < 0.01 && rb.velocity.y > -0.01))
         {   
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
@@ -76,5 +76,7 @@ public class Player : MonoBehaviour
     {
         currentCollider = null;
     }
+
+   
 
 }
