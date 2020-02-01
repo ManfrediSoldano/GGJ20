@@ -6,6 +6,13 @@ public class Portal : MonoBehaviour, SceneObjectController
 {
     public GameObject connectedPortal;
 
+    public GameObject audioManager;
+
+    public void Awake()
+    {
+        audioManager = GameObject.Find("AudioManager");
+    }
+
     public void ActivateObject(GameObject player)
     {
         ActivatePortal(player);
@@ -19,5 +26,6 @@ public class Portal : MonoBehaviour, SceneObjectController
     public void ActivatePortal(GameObject player)
     {
         player.gameObject.transform.position = connectedPortal.transform.position;
+        audioManager.GetComponent<AudioController>().Repair();
     }
 }

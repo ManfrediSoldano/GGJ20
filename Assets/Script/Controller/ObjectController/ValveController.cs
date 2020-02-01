@@ -8,6 +8,7 @@ public class ValveController : MonoBehaviour, SceneObjectController
     public WaterController waterController;
     public Color brokenColor;
     SpriteRenderer m_SpriteRenderer;
+    public GameObject audioManager;
 
 
     public void ActivateObject(GameObject player)
@@ -25,6 +26,7 @@ public class ValveController : MonoBehaviour, SceneObjectController
     {
         waterController = GameObject.Find("WaterController").GetComponent<WaterController>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        audioManager = GameObject.Find("AudioManager");
 
     }
 
@@ -37,6 +39,7 @@ public class ValveController : MonoBehaviour, SceneObjectController
         status = ValveStatus.BROKEN;
         waterController.openPipes++;
         m_SpriteRenderer.color = brokenColor;
+        audioManager.GetComponent<AudioController>().Broke();
     }
 
     /// <summary>
@@ -48,6 +51,7 @@ public class ValveController : MonoBehaviour, SceneObjectController
         status = ValveStatus.OPEN;
         waterController.openPipes--;
         m_SpriteRenderer.color = Color.white;
+        audioManager.GetComponent<AudioController>().Repair();
     }
 
 
