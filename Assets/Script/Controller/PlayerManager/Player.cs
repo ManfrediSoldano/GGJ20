@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         InputManager.OnMove += Walk;
+        InputManager.OnJump += Jump;
     }
 
     // Update is called once per frame
@@ -19,16 +20,17 @@ public class Player : MonoBehaviour
 
     void OnDestroy()
     {
-        InputManager.OnMove += Walk;
+        InputManager.OnMove -= Walk;
+        InputManager.OnJump -= Jump;
     }
 
-    void Walk(int Direction, int playerNumber) {
-        if (this.playerNumber== playerNumber) {
+    void Walk(int playerNumber, float Direction) {
+        if (this.playerNumber == playerNumber) {
 
         }
     }
 
-    void MoveRight(int playerNumber)
+    void Jump(int playerNumber)
     {
         if (this.playerNumber == playerNumber)
         {
