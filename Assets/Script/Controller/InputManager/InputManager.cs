@@ -113,10 +113,13 @@ public class InputManager : MonoBehaviour
         if (Input.GetAxis("Joy1DPadVertical") == 1)
         {
             NotifyVerticalMove(1);
+            Debug.Log("Pressed a vertical move (positive)", this);
         }
         else if (Input.GetAxis("Joy1DPadVertical") == -1)
         {
             NotifyVerticalMove(-1);
+            Debug.Log("Pressed a vertical move (negative)", this);
+
         }
 
 
@@ -156,10 +159,14 @@ public class InputManager : MonoBehaviour
         if (Input.GetAxis("Joy2DPadVertical") == 1)
         {
             NotifyVerticalMove(1);
+            Debug.Log("Pressed a vertical move (positive)", this);
+
         }
         else if (Input.GetAxis("Joy2DPadVertical") == -1)
         {
             NotifyVerticalMove(-1);
+            Debug.Log("Pressed a vertical move (negative)", this);
+
         }
 
     }

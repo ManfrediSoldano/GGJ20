@@ -13,6 +13,9 @@ public class SceneController : MonoBehaviour
     private string[] scenePaths;
 
     public bool blockLoading = false;
+
+    private int position = 0;
+
     void Start()
     {
 
@@ -30,7 +33,32 @@ public class SceneController : MonoBehaviour
 
     private void VerticalMove(float mov)
     {
-     
+        Debug.Log("Requested a vertical move", this);
+         if (mov > 0)
+        {
+            if (position == 0)
+            {
+                quitGame.Select();
+                position = 1;
+            } else
+            {
+                startGame.Select();
+                position = 0;
+            }
+        } else
+        {
+            if (position == 0)
+            {
+                startGame.Select();
+                position = 0;
+            }
+            else
+            {
+                quitGame.Select();
+                position = 1;
+                
+            }
+        }
     }
 
     private void LoadScene()
