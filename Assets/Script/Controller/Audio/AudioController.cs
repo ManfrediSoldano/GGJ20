@@ -1,12 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(AudioSource))]
 public class AudioController : MonoBehaviour
 {
-    AudioSource audioData;
+
+    public GameObject soundSystem;
 
     public AudioClip water;
     public AudioClip punch;
@@ -25,28 +26,32 @@ public class AudioController : MonoBehaviour
     public AudioClip alarm;
     public AudioClip victory;
 
-    void Start()
+    private void Play(AudioClip audioClip)
     {
-        audioData = GetComponent<AudioSource>();
+        GameObject reproducer = Instantiate(soundSystem, this.transform);
+        reproducer.GetComponent<Reproducer>().Play(audioClip);
     }
+
 
     public void Punch()
     {
-        audioData.clip = punch1;
-        audioData.Play(0);
+        Play(punch1);
     }
-
+ 
 
     public void DestroyPipe()
     {
-        audioData.clip = destroyPipe;
-        audioData.Play(0);
+        Play(destroyPipe);     
     }
 
     
     public void RepairPipe()
     {
-        audioData.clip = repairPipe;
-        audioData.Play(0);
+        Play(repairPipe);       
+    }
+
+    internal void Jump()
+    {
+        Play(jump1);
     }
 }
