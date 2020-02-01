@@ -9,10 +9,13 @@ public class InputManager : MonoBehaviour
     public delegate void Move(int playerNumber, float mov);
     public delegate void Jump(int playerNumber);
     public delegate void Use(int playerNumber);
+    public delegate void Pause(int playerNumber);
     //Event related to the delegate.
     public static event Move OnMove;
     public static event Jump OnJump;
     public static event Use OnUse;
+    public static event Pause OnPause;
+    
 
     [Range(0.0f, 1f)]
     public float limitHorizontalMove;
@@ -42,6 +45,14 @@ public class InputManager : MonoBehaviour
         if (OnUse != null)
         {
             OnUse(playerNumber);
+        }
+    }
+
+    private void NotifyPause(int playerNumber)
+    {
+        if (OnPause != null)
+        {
+            OnPause(playerNumber);
         }
     }
 
@@ -83,6 +94,11 @@ public class InputManager : MonoBehaviour
             NotifyUse(1);
         }
 
+        if (Input.GetButtonDown("Joy1Start"))
+        {
+            NotifyPause(1);
+        }
+
 
 
         //player 2
@@ -110,6 +126,11 @@ public class InputManager : MonoBehaviour
         if (Input.GetButtonDown("Joy2X"))
         {
             NotifyUse(2);
+        }
+
+        if (Input.GetButtonDown("Joy2Start"))
+        {
+            NotifyPause(2);
         }
 
     }

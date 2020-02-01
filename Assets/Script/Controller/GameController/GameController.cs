@@ -24,11 +24,39 @@ public class GameController : MonoBehaviour
 
     void FixedUpdate()
     {
-        timeLeft -= Time.fixedDeltaTime;
-        text.text = "Time: " + Mathf.Round(timeLeft);
-        if (timeLeft < 0)
+        if (timeLeft > 0)
         {
-            Application.LoadLevel("gameOver");
+            timeLeft -= Time.fixedDeltaTime;
+
+            //seconds to sessaggesimale conversion
+            int Minutes = ((int)Mathf.Round(timeLeft)) / 60;
+            int Seconds = ((int)Mathf.Round(timeLeft) % 60);
+            string timer = "";
+
+            if (Minutes < 10) {
+                timer = "0" + Minutes.ToString();
+            }
+            else{
+                timer = Minutes.ToString();
+            }
+
+            if (Seconds < 10)
+            {
+                timer += ":0" + Seconds.ToString();
+            }
+            else
+            {
+                timer += ":"+Seconds.ToString();
+            }
+
+            text.text =  timer;
+
+        }else if (timeLeft < 0)
+        {
+            timeLeft = 0;
+        }
+        else{
+            //Application.LoadLevel("gameOver");
         }
     }
 
