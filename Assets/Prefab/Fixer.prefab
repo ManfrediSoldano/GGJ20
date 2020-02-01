@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 4
-  jumpForce: 4
+  jumpForce: 5
   currentCollider: {fileID: 0}
   punchCollider: {fileID: 2638869911727097715}
   xButton: {fileID: 716641085882714660}

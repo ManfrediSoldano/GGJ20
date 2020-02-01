@@ -8,6 +8,7 @@ public class WaterController : MonoBehaviour
     public int openPipes = 0;
     public GameController controller;
     public SpawnManager spawnManager;
+    public float waterTopLimit = -1.75f;
 
     [Range(0.0f, 5f)]
     public float speed = 0.1f;
@@ -15,7 +16,7 @@ public class WaterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (openPipes > 0)
+        if (openPipes > 0 && transform.position.y <= waterTopLimit)
         {
             transform.position += new Vector3(0,Time.deltaTime*(openPipes/(10/speed)), 0);
         }
