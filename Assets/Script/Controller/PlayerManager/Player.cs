@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     public Collider2D currentCollider;
     private Animator animator;
-    
+    private bool isLookRight = true;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -38,6 +39,16 @@ public class Player : MonoBehaviour
         if (this.playerNumber == playerNumber) {
             rb.velocity = new Vector2 (direction * velocity, rb.velocity.y);
             animator.SetFloat("Velocity", Mathf.Abs(rb.velocity.x));
+            if (direction > 0 && !isLookRight)
+            {
+                transform.Rotate(0, 180, 0, Space.Self);
+                isLookRight = true;
+            }
+            else if(direction < 0 && isLookRight)
+            {
+                transform.Rotate(0, 180, 0, Space.Self);
+                isLookRight = false;
+            }
         }
     }
 
@@ -54,10 +65,11 @@ public class Player : MonoBehaviour
     void Use(int playerNumber)
     {
         Debug.Log("Received a USE request: " + playerNumber + " my player number: " + this.playerNumber);
-        animator.SetTrigger("Action");
+        
         if (this.playerNumber == playerNumber)
         {
-            if(currentCollider != null)
+            animator.SetTrigger("Action");
+            if (currentCollider != null)
             {
                 if(currentCollider.gameObject !=null && currentCollider.gameObject.tag != null)
                 {
@@ -68,8 +80,7 @@ public class Player : MonoBehaviour
                     }
                 }
             }
-        }
-     
+        }     
 
     }
 
