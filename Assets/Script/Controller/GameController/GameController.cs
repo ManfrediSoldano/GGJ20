@@ -25,17 +25,31 @@ public class GameController : MonoBehaviour
         while (numberOfFixers > 0)
         {
             GameObject player = spawnManager.SpawnNewPlayer(PlayerType.FIXER);
-            player.transform.parent = playerContainer.transform;
-            playersList.Add(player.GetComponent<Player>());
-            numberOfFixers--;
+            if (player != null)
+            {              
+                player.transform.parent = playerContainer.transform;
+                playersList.Add(player.GetComponent<Player>());
+                numberOfFixers--;
+            }
+            else
+            {
+                Debug.LogError("Not enough spawn point at the start (FIXERS) ", this);
+            }
         }
 
         while (numberOfDestroyers > 0)
         {
             GameObject player = spawnManager.SpawnNewPlayer(PlayerType.DESTROYER);
-            player.transform.parent = playerContainer.transform;
-            playersList.Add(player.GetComponent<Player>());
-            numberOfDestroyers--;
+            if (player != null)
+            {
+                player.transform.parent = playerContainer.transform;
+                playersList.Add(player.GetComponent<Player>());
+                numberOfDestroyers--;
+            }
+            else
+            {
+                Debug.LogError("Not enough spawn point at the start (DESTROYERS)", this);
+            }
         }
 
     }
@@ -43,15 +57,24 @@ public class GameController : MonoBehaviour
     internal void RemovePlayer(Player player)
     {
         playersList.Remove(player);
+        String name = player.name;
         GameObject newPlayer;
-        if (player is Fixer){
+        if (player is Fixer)
+        {
             newPlayer = spawnManager.SpawnNewPlayer(PlayerType.FIXER);
-        } else
+        }
+        else
         {
             newPlayer = spawnManager.SpawnNewPlayer(PlayerType.DESTROYER);
         }
-        Destroy(player);
-        newPlayer.transform.parent = playerContainer.transform;
-        playersList.Add(newPlayer.GetComponent<Player>());
+        Destroy(player.gameObject);
+        if (newPlayer != null)
+        {
+            newPlayer.transform.parent = playerContainer.transform;
+            playersList.Add(newPlayer.GetComponent<Player>());
+        } else
+        {
+            Debug.Log("Player "+ name+ " has been definately killed.");
+        }
     }
 }

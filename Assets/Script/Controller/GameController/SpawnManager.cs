@@ -26,8 +26,6 @@ public class SpawnManager : MonoBehaviour
             else if (point.type == SpawnPointType.SHARED)
                 sharedSpawnPointList.Add(point);
         }
-
-
     }
 
     /// <summary>
@@ -37,11 +35,16 @@ public class SpawnManager : MonoBehaviour
     public GameObject SpawnNewPlayer(PlayerType type)
     {
         SpawnPoint point = GetSpawnPositionCharacter(type);
-
-        if (type == PlayerType.FIXER)
-            return (Instantiate(fixerPrefab, point.transform.position, Quaternion.identity));
-        else
-            return (Instantiate(destroyerPrefab, point.transform.position, Quaternion.identity));
+        if (point != null)
+        {
+            if (type == PlayerType.FIXER)
+                return (Instantiate(fixerPrefab, point.transform.position, Quaternion.identity));
+            else
+                return (Instantiate(destroyerPrefab, point.transform.position, Quaternion.identity));
+        } else
+        {
+            return null;
+        }
     }
 
     /// <summary>
@@ -50,6 +53,7 @@ public class SpawnManager : MonoBehaviour
     /// <param name="type"> Type of the player. </param>
     public SpawnPoint GetSpawnPositionCharacter(PlayerType type)
     {
+        
         Random.InitState(System.DateTime.Now.Millisecond + seedHelper);
         seedHelper++;
         int shouldUseShared = Random.Range(0, 2);
@@ -62,7 +66,8 @@ public class SpawnManager : MonoBehaviour
         {
             if (sharedSpawnPointList.Count > 0 && destroyerSpawnPointList.Count == 0)
                 useShared = true;
-
+            if (sharedSpawnPointList.Count == 0 && destroyerSpawnPointList.Count == 0)
+                return null;
             if (useShared)
             {
                 int index = Random.Range(0, sharedSpawnPointList.Count);
@@ -78,7 +83,8 @@ public class SpawnManager : MonoBehaviour
         {
             if (sharedSpawnPointList.Count > 0 && fixerSpawnPointList.Count == 0)
                 useShared = true;
-
+            if (sharedSpawnPointList.Count == 0 && fixerSpawnPointList.Count == 0)
+                return null;
             if (useShared)
             {
                 int index = Random.Range(0, sharedSpawnPointList.Count);
@@ -89,6 +95,26 @@ public class SpawnManager : MonoBehaviour
                 int index = Random.Range(0, fixerSpawnPointList.Count);
                 return (fixerSpawnPointList[index]);
             }
+        }
+    }
+
+    /// <summary>
+    /// Remove the spawn point from the list of available spawn positions.
+    /// </summary>
+    /// <param name="point"></param>
+    public void RemoveSpawnPoint(SpawnPoint point)
+    {
+        if (point.type == SpawnPointType.DESTROYER)
+        {
+            destroyerSpawnPointList.Remove(point);
+        }
+        else if (point.type == SpawnPointType.SHARED)
+        {
+            sharedSpawnPointList.Remove(point);
+        }
+        else if (point.type == SpawnPointType.FIXER)
+        {
+            fixerSpawnPointList.Remove(point);
         }
     }
 }

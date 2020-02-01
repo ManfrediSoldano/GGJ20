@@ -7,7 +7,7 @@ public class WaterController : MonoBehaviour
 
     public int openPipes = 0;
     public GameController controller;
-
+    public SpawnManager spawnManager;
 
     [Range(0.0f, 5f)]
     public float speed = 0.1f;
@@ -30,7 +30,12 @@ public class WaterController : MonoBehaviour
             {
                 if (other.gameObject.tag == "Player")
                 {
-                    controller.RemovePlayer(other.gameObject.GetComponent<Player>());
+                    Player player = other.gameObject.GetComponent<Player>();
+                    controller.RemovePlayer(player);
+                } else if (other.gameObject.tag == "SpawnPoint")
+                {
+                    spawnManager.RemoveSpawnPoint(other.gameObject.GetComponent<SpawnPoint>());
+                    Destroy(other.gameObject);
                 }
             }
         }
