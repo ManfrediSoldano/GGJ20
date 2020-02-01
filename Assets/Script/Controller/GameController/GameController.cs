@@ -65,6 +65,7 @@ public class GameController : MonoBehaviour
     {
         playersList.Remove(player);
         String name = player.name;
+        int playerNumber = player.GetComponent<Player>().playerNumber;
         GameObject newPlayer;
         if (player is Fixer)
         {
@@ -77,6 +78,7 @@ public class GameController : MonoBehaviour
         Destroy(player.gameObject);
         if (newPlayer != null)
         {
+            newPlayer.GetComponent<Player>().playerNumber = playerNumber;
             newPlayer.transform.parent = playerContainer.transform;
             playersList.Add(newPlayer.GetComponent<Player>());
         } else

@@ -2,10 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ValveController : MonoBehaviour
+public class ValveController : MonoBehaviour, SceneObjectController
 {
     public ValveStatus status;
     public WaterController waterController;
+
+    public void ActivateObject(GameObject player)
+    {
+        if(status == ValveStatus.BROKEN)
+        {
+            FixedJoint();
+        } else
+        {
+            Broke();
+        }
+    }
 
     public void Awake()
     {
