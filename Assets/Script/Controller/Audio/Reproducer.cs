@@ -14,10 +14,11 @@ public class Reproducer : MonoBehaviour
     }
 
 
-    public void Play(AudioClip clip)
+    public void Play(AudioClip clip, float volume)
     {
         Debug.Log(clip.name +" "+ audioSource);
         audioSource.clip = clip;
+        audioSource.volume = volume;
         audioSource.Play(0);
         alreadyStarted = true;
     }
