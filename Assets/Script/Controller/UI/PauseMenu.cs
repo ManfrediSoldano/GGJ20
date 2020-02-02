@@ -21,6 +21,7 @@ public class PauseMenu : MonoBehaviour
         quitGame.onClick.AddListener(Quit);
         InputManager.OnVerticalMove += VerticalMove;
         InputManager.OnJump += Accept;
+        InputManager.OnPunch += Back;
         startGame.Select();
     }
 
@@ -42,6 +43,16 @@ public class PauseMenu : MonoBehaviour
         InputManager.OnJump -= Accept;
     }
 
+
+    private void Back(int player)
+    {
+        if (isActive)
+        {
+
+            Continue();
+
+        }
+    }
     private void Accept(int player)
     {
         if (isActive)
@@ -66,7 +77,7 @@ public class PauseMenu : MonoBehaviour
         {
             if (position == 0)
             {
-              
+
             }
             else
             {
@@ -84,7 +95,7 @@ public class PauseMenu : MonoBehaviour
             }
             else
             {
-                
+
 
             }
         }
@@ -95,7 +106,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (!blockLoading)
         {
-            SceneManager.LoadScene(1, LoadSceneMode.Single);
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
             blockLoading = true;
             gameController.PauseGame(1);
         }
