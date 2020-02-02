@@ -194,13 +194,15 @@ public class GameController : MonoBehaviour
     }
 
     public void PauseGame(int PlayerNumber) {
-        if (onPause == false)
+        Debug.Log("Pause game in game controller, onpuase:"+ onPause);
+        if (Time.timeScale == 1)
         {
             onPause = true;
             Time.timeScale = 0;
             text.text = "Pause";
             pauseScreen.SetActive(true);
         } else {
+            
             onPause = false;
             Time.timeScale = 1;
             pauseScreen.SetActive(false);

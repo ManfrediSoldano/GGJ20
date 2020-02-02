@@ -13,22 +13,55 @@ public class PauseMenu : MonoBehaviour
     public bool blockLoading = false;
     public GameController gameController;
 
+    public bool isActive = false;
 
     void Start()
     {
         startGame.onClick.AddListener(Continue);
         quitGame.onClick.AddListener(Quit);
-        InputManager.OnMove += Move;
+        InputManager.OnVerticalMove += VerticalMove;
+        InputManager.OnJump += Accept;
+        startGame.Select();
+    }
+
+    private void OnDisable()
+    {
+        isActive = false;
+    }
+
+    private void OnEnable()
+    {
+        isActive = true;
+        startGame.Select();
+
     }
 
 
     private void OnDestroy()
     {
-        InputManager.OnMove -= Move;
+        InputManager.OnVerticalMove -= VerticalMove;
+        InputManager.OnJump -= Accept;
     }
-    private void Move(int playerNumber, float mov)
+
+    private void Accept(int player)
     {
-        Debug.Log("Requested a vertical move", this);
+        if (isActive)
+        {
+            if (position == 0)
+            {
+                Continue();
+            }
+            else
+            {
+                Quit();
+            }
+        }
+    }
+
+
+    private void VerticalMove(float mov)
+    {
+        Debug.Log("Requested a move", this);
 
         if (mov > 0)
         {
@@ -67,11 +100,13 @@ public class PauseMenu : MonoBehaviour
         {
             SceneManager.LoadScene(1, LoadSceneMode.Single);
             blockLoading = true;
+            gameController.PauseGame(1);
         }
     }
 
     private void Continue()
     {
+        Debug.Log("Continue");
         gameController.PauseGame(1);
     }
 }
