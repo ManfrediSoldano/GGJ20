@@ -5,6 +5,7 @@ using UnityEngine;
 public class PunchColliderController : MonoBehaviour
 {
     public Player currentPlayer;
+    public GameObject bButton;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision != null && collision.gameObject != null && collision.gameObject.tag != null)
@@ -12,6 +13,7 @@ public class PunchColliderController : MonoBehaviour
             if (collision.gameObject.tag == "Player")
             {
                 currentPlayer = collision.gameObject.GetComponent<Player>();
+                bButton.SetActive(true);
             }
         }
     }
@@ -23,6 +25,7 @@ public class PunchColliderController : MonoBehaviour
             if (collision.gameObject.tag == "Player")
             {
                 currentPlayer = null;
+                bButton.SetActive(false);
             }
         }
     }
