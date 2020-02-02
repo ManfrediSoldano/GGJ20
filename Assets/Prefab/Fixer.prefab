@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 714629571353294090}
   - component: {fileID: 976093569979111416}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: XButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 6586175037383961886}
   - component: {fileID: 1594323300573007961}
   - component: {fileID: 2638869911727097715}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PunchCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 6337326194851560632}
   - component: {fileID: 4490799397348592495}
   - component: {fileID: 1967317197708086162}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fixer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6337326194851560633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.36, y: -3.32, z: 0}
+  m_LocalPosition: {x: -7.36, y: -3.286, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 0.2}
   m_Children:
   - {fileID: 6586175037383961886}
@@ -302,6 +302,7 @@ MonoBehaviour:
   velocity: 4
   jumpForce: 5
   currentCollider: {fileID: 0}
+  animator: {fileID: 0}
   punchCollider: {fileID: 2638869911727097715}
   xButton: {fileID: 716641085882714660}
 --- !u!95 &1967317197708086162

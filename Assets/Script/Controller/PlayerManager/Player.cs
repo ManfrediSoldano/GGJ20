@@ -88,6 +88,7 @@ public class Player : MonoBehaviour
                 {
                     if (currentCollider.gameObject.tag == "Object")
                     {
+                        Debug.Log("Using an Object: " + currentCollider.gameObject.name + " my player number: " + this.playerNumber);
                         currentCollider.gameObject.GetComponent<SceneObjectController>().ActivateObject(this.gameObject);
                     }
                 }
@@ -105,6 +106,7 @@ public class Player : MonoBehaviour
             {
                 if (currentCollider.gameObject.tag == "Object")
                 {
+                   
                     xButton.SetActive(true);
                 }
             }

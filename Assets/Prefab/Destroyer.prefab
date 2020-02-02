@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7580562383935474289}
   - component: {fileID: -2814062191251060266}
   - component: {fileID: 581590006242439801}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Destroyer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8865141424199025304}
   - component: {fileID: 1488275873774209931}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: XButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
