@@ -22,6 +22,7 @@ public class SceneController : MonoBehaviour
         startGame.onClick.AddListener(LoadScene);
         quitGame.onClick.AddListener(Quit);
         InputManager.OnVerticalMove += VerticalMove;
+        InputManager.OnJump += Accept;
 
         startGame.Select();
     }
@@ -29,7 +30,24 @@ public class SceneController : MonoBehaviour
     private void OnDestroy()
     {
         InputManager.OnVerticalMove -= VerticalMove;
+        InputManager.OnJump -= Accept;
+
     }
+
+
+
+    private void Accept(int player)
+    {
+        if (position == 0)
+        {
+            LoadScene();
+        }
+        else
+        {
+            Quit();
+        }
+    }
+
 
     private void VerticalMove(float mov)
     {

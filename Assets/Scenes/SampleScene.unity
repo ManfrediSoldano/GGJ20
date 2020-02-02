@@ -509,6 +509,10 @@ MonoBehaviour:
   playerContainer: {fileID: 2041015509}
   timeLeft: 60
   text: {fileID: 254463877}
+  PlumberWins: {fileID: 3731351091591282906, guid: 0c50f14beb9e80a439807e1ad08a8647,
+    type: 3}
+  DestroyerWins: {fileID: 4911979108755646702, guid: 020fb6e3255f8344bb14da6e0f25342f,
+    type: 3}
   pauseScreen: {fileID: 1012335155}
 --- !u!4 &165437986
 Transform:
@@ -1002,7 +1006,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -364, y: 0}
+  m_AnchoredPosition: {x: 0.00024414, y: 75}
   m_SizeDelta: {x: 512, y: 506.97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &259807713
@@ -5458,7 +5462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420006051}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.139999, y: 2.4, z: 0}
+  m_LocalPosition: {x: 8.541, y: 2.467, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2093920914}
@@ -6130,7 +6134,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 407.40015, y: 0}
+  m_AnchoredPosition: {x: 0, y: -114}
   m_SizeDelta: {x: 512, y: 506.97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1579559388
