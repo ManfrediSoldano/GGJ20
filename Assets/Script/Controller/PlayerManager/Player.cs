@@ -99,15 +99,15 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        currentCollider = collision;
+      
         if (currentCollider != null)
         {
             if (currentCollider.gameObject != null && currentCollider.gameObject.tag != null)
             {
                 if (currentCollider.gameObject.tag == "Object")
-                {
-                   
+                { 
                     xButton.SetActive(true);
+                    currentCollider = collision;
                 }
             }
         }
