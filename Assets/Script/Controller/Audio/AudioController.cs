@@ -26,35 +26,35 @@ public class AudioController : MonoBehaviour
     public AudioClip alarm;
     public AudioClip victory;
 
-    private void Play(AudioClip audioClip)
+    private void Play(AudioClip audioClip, float volume)
     {
         GameObject reproducer = Instantiate(soundSystem, this.transform);
-        reproducer.GetComponent<Reproducer>().Play(audioClip);
+        reproducer.GetComponent<Reproducer>().Play(audioClip, volume);
     }
 
     internal void Door()
     {
-        Play(openDoor);
+        Play(openDoor, 0.4f);
     }
 
     public void Punch()
     {
-        Play(punch1);
+        Play(punch1, 0.4f);
     }
 
 
      public void Repair()
     {
-        Play(repairPipe);
+        Play(repairPipe, 0.4f);
     }
 
     internal void Jump()
     {
-        Play(jump1);
+        Play(jump1, 0.4f);
     }
 
     internal void Broke()
     {
-        Play(destroyPipe);
+        Play(destroyPipe, 0.2f);
     }
 }
