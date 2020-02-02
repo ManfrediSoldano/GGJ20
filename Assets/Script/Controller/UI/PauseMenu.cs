@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
     public bool blockLoading = false;
     public GameController gameController;
 
+    public bool isActive = false;
 
     void Start()
     {
@@ -20,6 +21,19 @@ public class PauseMenu : MonoBehaviour
         quitGame.onClick.AddListener(Quit);
         InputManager.OnVerticalMove += VerticalMove;
         InputManager.OnJump += Accept;
+        startGame.Select();
+    }
+
+    private void OnDisable()
+    {
+        isActive = false;
+    }
+
+    private void OnEnable()
+    {
+        isActive = true;
+        startGame.Select();
+
     }
 
 
@@ -31,12 +45,16 @@ public class PauseMenu : MonoBehaviour
 
     private void Accept(int player)
     {
-        if (position == 0)
+        if (isActive)
         {
-            Continue();
-        } else
-        {
-            Quit();
+            if (position == 0)
+            {
+                Continue();
+            }
+            else
+            {
+                Quit();
+            }
         }
     }
 
