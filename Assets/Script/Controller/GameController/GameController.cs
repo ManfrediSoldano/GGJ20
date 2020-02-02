@@ -21,6 +21,9 @@ public class GameController : MonoBehaviour
     public GameObject PlumberWins;
     public GameObject DestroyerWins;
 
+    public GameObject pauseScreen;
+
+
     public void Awake()
     {
         InputManager.OnPause += PauseGame;
@@ -190,15 +193,17 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void PauseGame(int PlayerNumber) {
+    public void PauseGame(int PlayerNumber) {
         if (onPause == false)
         {
             onPause = true;
             Time.timeScale = 0;
             text.text = "Pause";
+            pauseScreen.SetActive(true);
         } else {
             onPause = false;
             Time.timeScale = 1;
+            pauseScreen.SetActive(false);
         }
     }
 
