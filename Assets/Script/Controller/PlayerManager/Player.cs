@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public PunchColliderController punchCollider;
     private bool locker = false;
     public GameObject xButton;
+    public GameObject buttonContainer;
     // Start is called before the first frame update
     void Awake()
     {
@@ -54,11 +55,13 @@ public class Player : MonoBehaviour
             if (direction > 0 && !isLookRight)
             {
                 transform.Rotate(0, 180, 0, Space.Self);
+                buttonContainer.transform.Rotate(0, 180, 0, Space.Self);
                 isLookRight = true;
             }
             else if (direction < 0 && isLookRight)
             {
                 transform.Rotate(0, 180, 0, Space.Self);
+                buttonContainer.transform.Rotate(0, 180, 0, Space.Self);
                 isLookRight = false;
             }
         }
