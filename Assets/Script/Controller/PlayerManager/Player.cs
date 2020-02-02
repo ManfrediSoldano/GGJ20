@@ -138,6 +138,7 @@ public class Player : MonoBehaviour
                     if (punchCollider.currentPlayer != null
                         && playerInList == punchCollider.currentPlayer)
                     {
+                        audioController.Punch();
                         locker = true;
                         animator.SetTrigger("Killed");
                         gameController.Kill(playerInList);

@@ -39,7 +39,7 @@ public class AudioController : MonoBehaviour
 
     public void Punch()
     {
-        Play(punch1, 0.4f);
+        Play(punch1, 0.18f);
     }
 
 
