@@ -337,6 +337,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlumberWins
       objectReference: {fileID: 0}
+    - target: {fileID: 3731351091591282906, guid: 0c50f14beb9e80a439807e1ad08a8647,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c50f14beb9e80a439807e1ad08a8647, type: 3}
 --- !u!1001 &4911979109181350398
@@ -350,6 +355,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DestroyerWins
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911979108755646702, guid: 020fb6e3255f8344bb14da6e0f25342f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4911979108755646703, guid: 020fb6e3255f8344bb14da6e0f25342f,
         type: 3}

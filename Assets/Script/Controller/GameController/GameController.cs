@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour
     public Text text;
     //Pause Handling
     private bool onPause = false;
+    //
+    public GameObject PlumberWins;
+    public GameObject DestroyerWins;
 
     public void Awake()
     {
@@ -203,20 +206,30 @@ public class GameController : MonoBehaviour
     void WinConditions(string winner) {
         if (alreadyFinished == false)
         {
-            if ((winner == "Destroyer" && timeLeft == 0) || (winner == "Plumber" && playersList.Count == 0))
+            //tie
+            /*if ((winner == "Destroyer" && timeLeft == 0) || (winner == "Plumber" && playersList.Count == 0))
             {
                 Debug.Log("Tie");
             }
-            else if (winner == "Plumber")
+            else*/ if (winner == "Plumber")
             {
                 Debug.Log("Plumber Wins");
+                Instantiate(PlumberWins);
             }
             else if (winner == "Destroyer")
             {
                 Debug.Log("Destroyer Wins");
+                Instantiate(DestroyerWins);
             }
             alreadyFinished = true;
+            StartCoroutine(Exit());
         }
+    
 
+    }
+
+    IEnumerator Exit() {
+        yield return new WaitForSeconds(3);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
     }
 }
