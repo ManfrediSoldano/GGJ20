@@ -85,7 +85,7 @@ public class SceneController : MonoBehaviour
     {
         if (!blockLoading)
         {
-            SceneManager.LoadScene(0, LoadSceneMode.Single);
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
             blockLoading = true;
             if (Loading != null) {
                 Loading.gameObject.SetActive(true);
