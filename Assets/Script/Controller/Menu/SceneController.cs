@@ -11,6 +11,7 @@ public class SceneController : MonoBehaviour
     public Button quitGame;
     private AssetBundle myLoadedAssetBundle;
     private string[] scenePaths;
+    public Text Loading;
 
     public bool blockLoading = false;
 
@@ -89,6 +90,9 @@ public class SceneController : MonoBehaviour
         {
             SceneManager.LoadScene(0, LoadSceneMode.Single);
             blockLoading = true;
+            if (Loading != null) {
+                Loading.gameObject.SetActive(true);
+            }
         }
     }
 
