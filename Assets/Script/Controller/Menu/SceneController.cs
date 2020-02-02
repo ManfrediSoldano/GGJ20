@@ -58,9 +58,7 @@ public class SceneController : MonoBehaviour
         {
             if (position == 0)
             {
-                Debug.Log("Quit Game", this);
-                quitGame.Select();
-                position = 1;
+                
             } else
             {
                 Debug.Log("Start Game", this);
@@ -77,8 +75,7 @@ public class SceneController : MonoBehaviour
             }
             else
             {
-                startGame.Select();
-                position = 0;
+                
                 
             }
         }

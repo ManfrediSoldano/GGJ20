@@ -1017,7 +1017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGame: {fileID: 1183857901}
   quitGame: {fileID: 410736071}
-  Loading: {fileID: 0}
+  Loading: {fileID: 643028877}
   blockLoading: 0
 --- !u!4 &470346356
 Transform:

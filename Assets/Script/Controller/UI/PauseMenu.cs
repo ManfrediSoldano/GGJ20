@@ -33,7 +33,6 @@ public class PauseMenu : MonoBehaviour
     {
         isActive = true;
         startGame.Select();
-
     }
 
 
@@ -67,8 +66,7 @@ public class PauseMenu : MonoBehaviour
         {
             if (position == 0)
             {
-                quitGame.Select();
-                position = 1;
+              
             }
             else
             {
@@ -86,8 +84,7 @@ public class PauseMenu : MonoBehaviour
             }
             else
             {
-                startGame.Select();
-                position = 0;
+                
 
             }
         }
